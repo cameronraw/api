@@ -1,8 +1,8 @@
-use std::{fs::File, io, io::{ErrorKind, Write}};
+use std::{fs::File, fs::OpenOptions, io, io::{ErrorKind, Write}};
 
 pub fn get_log_file() -> Result<File, io::Error> {
 
-    let f = File::open("logs/log.txt");
+    let mut f = OpenOptions::new().write(true).open("logs/log.txt");
 
     let f = match f {
         Ok(f) => f,
@@ -16,7 +16,6 @@ pub fn get_log_file() -> Result<File, io::Error> {
     };
 
     return Ok(f);
-
 }
 
 pub fn write(message: &str){
